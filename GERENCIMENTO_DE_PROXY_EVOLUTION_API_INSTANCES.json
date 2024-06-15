@@ -1,0 +1,426 @@
+{
+  "name": "GERENCIMENTO DE PROXY EVOLUTION API INSTANCES",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "f6f64e67-e893-40aa-8180-073d77332e90",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1220,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://{{ $('Edit Fields - INFORMAÇÕES GERAIS').item.json.evolution_url }}/instance/fetchInstances",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $('Edit Fields - INFORMAÇÕES GERAIS').item.json.evolution_apikey_global }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "08efe775-ea80-4bee-8233-ce8c53fdbe33",
+      "name": "HTTP Request - BUSCAR INSTANCIAS",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        740,
+        620
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "d4139538-623f-4cdd-af3e-55b94176d485",
+      "name": "When clicking \"Test workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        280,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://{{ $node[\"Edit Fields - INFORMAÇÕES GERAIS\"].json[\"evolution_url\"] }}/proxy/set/{{ $node[\"Loop Over Items\"].json[\"instance\"][\"instanceName\"] }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $node[\"Edit Fields - INFORMAÇÕES GERAIS\"].json[\"evolution_apikey_global\"] }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"enabled\": true,\n    \"proxy\": {\n        \"host\": \"{{ $node[\"Edit Fields - INFORMAÇÕES GERAIS\"].json[\"host\"] }}\",\n        \"port\": \"{{ $node[\"Edit Fields - INFORMAÇÕES GERAIS\"].json[\"port\"] }}\",\n        \"protocol\": \"{{ $node[\"Edit Fields - INFORMAÇÕES GERAIS\"].json[\"protocol\"] }}\",\n        \"username\": \"{{ $node[\"Edit Fields - INFORMAÇÕES GERAIS\"].json[\"username\"] }}\",\n        \"password\": \"{{ $node[\"Edit Fields - INFORMAÇÕES GERAIS\"].json[\"password\"] }}\"\n    }\n}",
+        "options": {}
+      },
+      "id": "3d0adc87-10cc-46dc-b962-1bd3915c2c5f",
+      "name": "HTTP Request - ATIVAR PROXY NA INSTANCIAS",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1860,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "unit": "seconds"
+      },
+      "id": "9c30eb22-4f59-4c4a-8f43-3ab3be720af9",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        2040,
+        640
+      ],
+      "webhookId": "9aa893e2-77ac-425c-8d73-a806e45f7e42"
+    },
+    {
+      "parameters": {
+        "url": "=https://{{ $node[\"Edit Fields - INFORMAÇÕES GERAIS\"].json[\"evolution_url\"] }}/proxy/find/{{ $json.instance.instanceName }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $node[\"Edit Fields - INFORMAÇÕES GERAIS\"].json[\"evolution_apikey_global\"] }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d7f8f6cc-c30e-4a63-ae96-04557363a6c5",
+      "name": "GET PROXY INSTANCIAS",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1420,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cd47ba93-21e0-4641-94a8-c3d7f7eb69b4",
+              "name": "evolution_url",
+              "value": "evo.setupautomatizado.com.br",
+              "type": "string"
+            },
+            {
+              "id": "d4153ece-83a2-45ae-97cf-2ac48e1978f7",
+              "name": "evolution_apikey_global",
+              "value": "aula-proxy-evolution",
+              "type": "string"
+            },
+            {
+              "id": "f7b70e9d-5bee-4bd4-b215-8367b775c8b1",
+              "name": "host",
+              "value": "brd.superproxy.io",
+              "type": "string"
+            },
+            {
+              "id": "38ddd4fa-2d51-440c-b59f-c67a33746549",
+              "name": "port",
+              "value": "22225",
+              "type": "string"
+            },
+            {
+              "id": "f38ad67c-358b-4ed7-afbd-436632e82377",
+              "name": "protocol",
+              "value": "http",
+              "type": "string"
+            },
+            {
+              "id": "505593f2-ee5c-4755-b79f-134a69bf65c7",
+              "name": "username",
+              "value": "brd-customer-hl_4660dc07-zone-evo_proxy1",
+              "type": "string"
+            },
+            {
+              "id": "21ded379-8ac3-4bdb-984a-26b751eabebd",
+              "name": "password",
+              "value": "6j5axtjowlf4",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d28afd21-dbc9-4f74-8ac6-b689cc34896b",
+      "name": "Edit Fields - INFORMAÇÕES GERAIS",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        500,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## EDITE SUAS INFORMAÇÕES AQUI!",
+        "width": 190.61021813122812
+      },
+      "id": "52910c4d-b876-48aa-a4c8-a0a72d6db507",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        500,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## PROXY MANAGER:\n\nhttps://brightdata.com/products/proxy-manager\n\n### EXISTEM VARIOS EU USO ESSE!",
+        "width": 344.31321837682134
+      },
+      "id": "c5a1209a-9393-4361-8a41-ff69a4043385",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        500,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "517420de-6ec8-45d4-a302-91aac07c91ba",
+              "leftValue": "={{ $json.enabled }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "5a2d61c2-258f-4748-8c65-c27bb0bd896d",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1640,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.instance.status }}",
+                    "rightValue": "open",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "INSTANCIAS CONECTADAS"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "allMatchingOutputs": true
+        }
+      },
+      "id": "a255c39d-ec22-4691-83bb-de286a3ea749",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        960,
+        620
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request - BUSCAR INSTANCIAS": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking \"Test workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields - INFORMAÇÕES GERAIS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request - ATIVAR PROXY NA INSTANCIAS": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields - INFORMAÇÕES GERAIS": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request - BUSCAR INSTANCIAS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "GET PROXY INSTANCIAS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET PROXY INSTANCIAS": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request - ATIVAR PROXY NA INSTANCIAS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2338244a-66e3-470a-bf42-d94b53b29b97",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0c4b595406290e8203112b621f4afd3211b5bc61198ded8bfea396e3376a226a"
+  },
+  "id": "f5NcH5XXvWTuLhx7",
+  "tags": [
+    {
+      "createdAt": "2024-02-07T10:05:23.565Z",
+      "updatedAt": "2024-02-07T10:05:23.565Z",
+      "id": "A19hcwh5F2Jm7BAk",
+      "name": "n8n"
+    },
+    {
+      "createdAt": "2024-04-07T03:12:36.858Z",
+      "updatedAt": "2024-04-07T03:12:36.858Z",
+      "id": "7Yvqoh0kqCZDLjFk",
+      "name": "Proxy"
+    },
+    {
+      "createdAt": "2024-02-07T10:05:30.364Z",
+      "updatedAt": "2024-02-07T10:05:30.364Z",
+      "id": "Wta5w9BvmUrZR85z",
+      "name": "EvolutionAPI"
+    }
+  ]
+}
