@@ -1,22 +1,19 @@
-# Inteligência Artificial Conversacional no WhatsApp com Guilherme Jansen
+# Proxy Manager Evolution API
 
-Este repositório contém materiais e exemplos relacionados à aula sobre Inteligência Artificial Conversacional no WhatsApp, ministrada por Guilherme Jansen.
+Este repositório contém materiais e exemplos relacionados à aula sobre ativação do Proxy Manager na Evolution API, ministrada por Guilherme Jansen.
 
-![n8n](https://s3.setupautomatizado.com.br/typebot/public/workspaces/cls6kc4by0001dk2z78nks8fm/typebots/cls6lny9k0001hw5zglvn3j0r/blocks/t6xoqa9s15gqwlrl6pfxyrm6?v=1709830460096)
+![n8n](https://s3.setupautomatizado.com.br/typebot/public/workspaces/cls6kc4by0001dk2z78nks8fm/typebots/clx9jea80000au7aynw9s7kwx/blocks/oloisx7mwhej73zn1bpal02x?v=1718470476229)
 
 ## Conteúdo da Aula
 
-✅  Introdução e Apresentação  
-✅  Fundamentos da IA Conversacional  
-✅  Casos de Uso no WhatsApp  
-✅  Mão na Massa: Criando um Chatbot para WhatsApp  
-✅  Integração e Gerenciamento  
-✅  Q/A - Perguntas e Respostas  
+✅  Implementação do Proxy Manager  
 
 ## Recursos Adicionais
 
-- [Mapa Mental](https://whimsical.com/inteligencia-artificial-conversacional-no-whatsapp-mapa-mental-SBtvzmgA245qtpHbA1K8Wp)
-- [Aula no YouTube](https://www.youtube.com/live/EkTm75uNoaE?si=EtyUnYx-45MHzN_j)
+- [Aula no YouTube](https://www.youtube.com/watch?v=0Q2mrF080cU)
+- [Comunidade Discord EvolutionAPI](https://evolution-api.com/discord)
+- [Comunidade Whatsapp EvolutionAPI](https://evolution-api.com/whatsapp)
+- [EvolutionAPI PRO](https://pay.kiwify.com.br/SzPrarM?afid=rsWnILLl)
 - [Universidade Promovaweb](https://go.hotmart.com/J88615002B)
 ---
 <div align="right">
